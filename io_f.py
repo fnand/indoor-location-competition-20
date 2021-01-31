@@ -83,7 +83,8 @@ def read_data_file(data_filename):
             major = line_data[3]
             minor = line_data[4]
             rssi = line_data[6]
-            ibeacon_data = [ts, '_'.join([uuid, major, minor]), rssi]
+            dist = line_data[7]
+            ibeacon_data = [ts, '_'.join([uuid, major, minor]), dist]
             ibeacon.append(ibeacon_data)
             continue
 
