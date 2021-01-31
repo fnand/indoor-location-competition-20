@@ -75,7 +75,7 @@ def read_data_file(data_filename):
             lastseen_ts = line_data[6]
             wifi_data = [sys_ts, ssid, bssid, rssi, lastseen_ts]
             # Ignore old wifi pings
-            if int(sys_ts) - int(lastseen_ts) < 500:
+            if int(sys_ts) - int(lastseen_ts) < 1000:
                 wifi.append(wifi_data)
             continue
 
