@@ -74,7 +74,9 @@ def read_data_file(data_filename):
             rssi = line_data[4]
             lastseen_ts = line_data[6]
             wifi_data = [sys_ts, ssid, bssid, rssi, lastseen_ts]
-            wifi.append(wifi_data)
+            # Ignore old wifi pings
+            if sys_ts - lastseen_ts < 1000:
+                wifi.append(wifi_data)
             continue
 
         if line_data[1] == 'TYPE_BEACON':
