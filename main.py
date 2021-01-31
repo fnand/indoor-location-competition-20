@@ -166,14 +166,14 @@ def extract_ibeacon_dist(mwi_datas):
         ibeacon_data = mwi_datas[position_key]['ibeacon']
         for ibeacon_d in ibeacon_data:
             ummid = ibeacon_d[1]
-            dist = ibeacon_d[2]
+            dist = float(ibeacon_d[2])
             
             if ummid in ibeacon_dist:
                 position_dist = ibeacon_dist[ummid]
                 if position_key in position_dist:
                     old_dist = position_dist[position_key][0]
                     old_count = position_dist[position_key][1]
-                    position_dist[position_key][0] = dist #(old_dist * old_count + dist) / (old_count + 1)
+                    position_dist[position_key][0] = (old_dist * old_count + dist) / (old_count + 1)
                     position_dist[position_key][1] = 1 #old_count + 1
                 else:
                     position_dist[position_key] = np.array([dist, 1])
