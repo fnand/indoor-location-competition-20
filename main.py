@@ -139,7 +139,7 @@ def extract_ibeacon_rssi(mwi_datas):
         for ibeacon_d in ibeacon_data:
             ummid = ibeacon_d[1]
             rssi = int(ibeacon_d[2])
-
+            
             if ummid in ibeacon_rssi:
                 position_rssi = ibeacon_rssi[ummid]
                 if position_key in position_rssi:
@@ -156,6 +156,34 @@ def extract_ibeacon_rssi(mwi_datas):
             ibeacon_rssi[ummid] = position_rssi
 
     return ibeacon_rssi
+
+
+def extract_ibeacon_dist(mwi_datas):
+    ibeacon_dist = {}
+    for position_key in mwi_datas:
+        # print(f'Position: {position_key}')
+
+        ibeacon_data = mwi_datas[position_key]['ibeacon']
+        for ibeacon_d in ibeacon_data:
+            ummid = ibeacon_d[1]
+            dist = ibeacon_d[2]
+            """
+            if ummid in ibeacon_rssi:
+                position_rssi = ibeacon_rssi[ummid]
+                if position_key in position_rssi:
+                    old_rssi = position_rssi[position_key][0]
+                    old_count = position_rssi[position_key][1]
+                    position_rssi[position_key][0] = (old_rssi * old_count + rssi) / (old_count + 1)
+                    position_rssi[position_key][1] = old_count + 1
+                else:
+                    position_rssi[position_key] = np.array([rssi, 1])
+            else:
+                position_rssi = {}
+                position_rssi[position_key] = np.array([rssi, 1])
+            """
+            ibeacon_dist[ummid] = dist 
+
+    return ibeacon_dist
 
 
 def extract_wifi_count(mwi_datas):
